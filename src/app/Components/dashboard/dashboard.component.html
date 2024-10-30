@@ -1,1 +1,52 @@
-<p>dashboard works!</p>
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="container mt-4">
+    <h2 class="mb-4">Notes Dashboard</h2>
+  
+    <div class="row">
+      <!-- Sidebar with note titles and creation dates -->
+      <div class="col-md-4">
+        <div class="list-group">
+          <h5 class="list-group-item active">Your Notes</h5>
+          <div *ngFor="let note of notes" class="list-group-item d-flex justify-content-between align-items-center">
+            <div (click)="toggleNote(note)">
+              <strong>{{ note.title }}</strong>
+              <br>
+              <small class="text-muted">{{ note.date | date: 'fullDate' }}</small>
+            </div>
+            <button class="btn btn-link btn-sm" (click)="toggleNote(note)">
+              {{ selectedNote === note ? 'Close' : 'Open' }}
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Main content area to display selected note details -->
+      <div class="col-md-8">
+        <div *ngIf="selectedNote" class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>{{ selectedNote.title }}</h5>
+            <small class="text-muted">Created on: {{ selectedNote.date | date: 'fullDate' }}</small>
+          </div>
+          <div class="card-body">
+            <p>{{ selectedNote.content }}</p>
+            <button (click)="deleteNote(selectedNote.id)" class="btn btn-danger">Delete Note</button>
+          </div>
+        </div>
+  
+        <div *ngIf="!selectedNote" class="alert alert-info">
+          Select a note from the sidebar to view details.
+        </div>
+      </div>
+    </div>
+  
+    <!-- Add New Note Form -->
+    <div class="card mt-4">
+      <div class="card-header">Add New Note</div>
+      <div class="card-body">
+        <input [(ngModel)]="newNote.title" type="text" class="form-control mb-3" placeholder="Note Title">
+        <textarea [(ngModel)]="newNote.content" class="form-control mb-3" placeholder="Note Content"></textarea>
+        <button (click)="addNote()" class="btn btn-primary">Add Note</button>
+      </div>
+    </div>
+  </div>
+  

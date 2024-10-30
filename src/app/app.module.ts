@@ -9,6 +9,9 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment.development';
 import { FormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './Components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './Components/verify-email/verify-email.component';
+
 
 
 @NgModule({
@@ -17,6 +20,9 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+   
     
   ],
   imports: [

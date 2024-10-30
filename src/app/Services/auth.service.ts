@@ -25,9 +25,11 @@ export class AuthService {
 
   //register method
   register(email:string, password:string){
-    this.fireauth.createUserWithEmailAndPassword(email, password).then( () =>{
+    this.fireauth.createUserWithEmailAndPassword(email, password).then( res =>{
       alert('Registration was successful')
       this.router.navigate(['./login']);
+
+      this.sendEmailForVerification(res.user)
 
 
     }, err => {
@@ -52,4 +54,25 @@ export class AuthService {
     )
   }
 
+  //forgot password
+  forgotPassword(email:string){
+    this.fireauth.sendPasswordResetEmail(email).then( () => {
+      this.router.navigate(['/verify-email'])
+
+    }, err =>{
+      alert('Something went Wrong');
+    })
+
+  }
+
+  //email verification
+  sendEmailForVerification(user :any){
+    user.sendEmailForVerification().then((res:any) =>{
+   this.router.navigate(['/verify-email']);
+     }, (err: any) => { 
+         alert('Something went wrong. Not able t send mail to your email.')
+      
+    })
+  }
 }
+
