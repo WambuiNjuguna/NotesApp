@@ -16,6 +16,7 @@
             <button class="btn btn-link btn-sm" (click)="toggleNote(note)">
               {{ selectedNote === note ? 'Close' : 'Open' }}
             </button>
+            
           </div>
         </div>
       </div>
@@ -48,5 +49,9 @@
         <button (click)="addNote()" class="btn btn-primary">Add Note</button>
       </div>
     </div>
+    <!-- Logout Button -->
+  <div class="mt-4">
+    <button (click)="logout()" class="btn btn-secondary">Logout</button>
+  </div>
   </div>
   

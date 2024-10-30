@@ -1,6 +1,8 @@
 // src/app/dashboard/dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { DataService, Note } from '../../Services/data.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +14,16 @@ export class DashboardComponent implements OnInit {
   newNote: Note = { title: '', content: '', date: new Date () };
   selectedNote: Note | null=null;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+     private router:Router,
+     private authService:AuthService,
+    ) {}
 
   ngOnInit(): void {
     this.dataService.getNotes().subscribe(notes => {
       this.notes = notes;
+      console.log(this.notes);
     });
   }
 
@@ -41,5 +48,11 @@ export class DashboardComponent implements OnInit {
 
   toggleNote(note: Note): void{
     this.selectedNote =this.selectedNote === note? null:note;
+  }
+
+  logout(): void {
+  
+    this.authService.logout(); 
+    this.router.navigate(['/login']); // Redirect to the login page
   }
 }

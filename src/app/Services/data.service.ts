@@ -9,7 +9,7 @@ export interface Note {
   id?: string;
   title: string;
   content: string;
-  date: any;
+  date: Date;
 }
 
 @Injectable({
@@ -33,4 +33,7 @@ export class DataService {
   deleteNote(id: string): Promise<void> {
     return this.firestore.collection(this.collectionName).doc(id).delete();
   }
+
+
+ 
 }
